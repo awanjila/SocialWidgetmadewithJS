@@ -1,68 +1,132 @@
-<style type="text/css">
-#widgetBtn {
-    overflow: hidden;
-    position: relative;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-.carousel {
-    display: flex;
-    overflow: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+        /* Added styles for the widget container */
+        #widgetContainer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+            z-index: 999;
+        }
 
-.carousel div {
-    flex: 0 0 100%;
-    transition: transform 1s ease-in-out;
-}
-</style>
+        #widgetBtn {
+            background-color: #dfa72d;
+            border-radius: 50%;
+            padding: 30px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .carousel div {
+            flex: 0 0 100%;
+            display: none;
+        }
+
+        #widgetModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
 
 <!-- Button with Carousel -->
-<button id="widgetBtn" style="background-color: #dfa72d; border-radius: 50%; padding: 30px; cursor: pointer; position: relative;">
-    <div class="carousel">
-        <!-- Icons go here -->
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\whatsapp.png" alt="WhatsApp"></div>
+<!-- Wrapped the button in a container div -->
+<div id="widgetContainer">
+    <button id="widgetBtn">
+        <div class="carousel">
+            <!-- Icons go here -->
+            <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\whatsapp.png" alt="WhatsApp"></div>
         <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\mail-inbox-app.png" alt="Email"></div>
         <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\messenger.png" alt="Messenger"></div>
         <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back"></div>
-    </div>
-</button>
+        </div>
+    </button>
+</div>
 
 <!-- Modal -->
-<div id="widgetModal" style="display: none;">
-    <div>
+<div id="widgetModal">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
         <!-- Icons go here -->
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\mail-inbox-app.png" alt="Email">Email Us</div>
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\whatsapp.png" alt="WhatsApp">Whatsapp Us</div>
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\messenger.png" alt="Messenger">Messenger Us</div>
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back">Request Callback</div>
+        <div style="text-align: center; display: flex; align-items: center; margin-bottom: 10px;">
+                  <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\mail-inbox-app.png" alt="Email" style="margin-right: 10px">Send Us an Email
+                </div>
+
+                    <div style="text-align: center; display: flex; align-items: center; margin-bottom: 10px;">
+                  <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\whatsapp.png"  alt="WhatsApp" style="margin-right: 10px"> We are on Whatsapp
+               </div>
+                
+                       <div style="text-align: center; display: flex; align-items: center; margin-bottom: 10px;">
+                   <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\messenger.png" alt="Messenger" style="margin-right: 10px"> We are on Facebook
+               </div>
+                       <div style="text-align: center; display: flex; align-items: center; margin-bottom: 10px;">
+                   <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back" style="margin-right: 10px"> Request a call Back
+               </div>
     </div>
 </div>
 
 <script type="text/javascript">
-$(document).ready(function () {
-    var currentIndex = 0;
-    var items = $('#widgetBtn .carousel div');
+    $(document).ready(function () {
+        var currentIndex = 0;
+        var items = $('#widgetBtn .carousel div');
+        var totalItems = items.length;
 
-    function showItem(index) {
-        var itemWidth = items.parent().width(); // Use parent width
-        var newPosition = -index * itemWidth;
-        $('#widgetBtn .carousel').css('transform', 'translateX(' + newPosition + 'px)');
-    }
+        function showItem(index) {
+            items.hide();
+            items.eq(index).show();
+        }
 
-    function nextItem() {
-        currentIndex = (currentIndex + 1) % items.length;
-        showItem(currentIndex);
-    }
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % totalItems;
+            showItem(currentIndex);
+        }
 
-    setInterval(nextItem, 2000); // Change slide every 2 seconds
+        // Wait for images to load
+        $(window).on('load', function () {
+            // Set initial position and show first item
+            showItem(currentIndex);
 
-    $('#widgetBtn').click(function () {
-        $('#widgetModal').toggle();
+            // Change slide every 2 seconds
+            setInterval(nextItem, 2000);
+        });
+
+        $('#widgetBtn').click(function () {
+            $('#widgetModal').toggle();
+        });
     });
-});
 </script>
+
+</body>
+</html>
