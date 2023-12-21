@@ -1,0 +1,167 @@
+body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Styles for the widget container */
+        #widgetContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px; /* Adjusted to float to the right */
+            z-index: 999;
+        }
+
+        #widgetBtn {
+            background-color: #dfa72d;
+            border: none; /* Removed border */
+            border-radius: 50%;
+            padding: 30px; /* Increased size */
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: flash 2s infinite alternate, moveRight 2s infinite alternate; /* Added moveRight animation */
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .carousel div {
+            flex: 0 0 100%;
+            display: none;
+        }
+
+        .carousel img {
+            width: 30px;
+            margin: 0 5px;
+        }
+
+        #widgetModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        /* Added keyframes for flashing animation */
+        @keyframes flash {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.5;
+            }
+        }
+
+        /* Added keyframes for moving to the right animation */
+        @keyframes moveRight {
+            from {
+                right: 20px;
+            }
+            to {
+                right: 80px; /* Adjust the distance as needed */
+            }
+        }
+
+         #widgetModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+        }
+
+        #widgetModal div {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #widgetModal img {
+            width: 50px; /* Adjust the size as needed */
+            margin-right: 10px;
+        }
+
+        #widgetModal button {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        #widgetModal button img {
+            margin-right: 10px;
+        }
+
+         #callBackModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            max-width: 300px; /* Adjust as needed */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #callBackModal p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #callBackModal form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #callBackModal label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #callBackModal input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #callBackModal button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
