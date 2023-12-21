@@ -4,61 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Page Title</title>
-   <style type="text/css">
-    /* Other styles remain unchanged */
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    #callBackModal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1001;
-    }
+        /* Styles for the widget container */
+        #widgetContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px; /* Adjusted to float to the right */
+            z-index: 999;
+        }
 
-    #callBackModal form {
-        text-align: center;
-    }
+        #widgetBtn {
+            background-color: #dfa72d;
+            border: none; /* Removed border */
+            border-radius: 50%;
+            padding: 30px; /* Increased size */
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: flash 2s infinite alternate, moveRight 2s infinite alternate; /* Added moveRight animation */
+        }
 
-    #callBackModal label {
-        display: block;
-        margin-bottom: 10px;
-    }
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-    #callBackModal input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-    }
+        .carousel div {
+            flex: 0 0 100%;
+            display: none;
+        }
 
-    #callBackModal button {
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-</style>
+        .carousel img {
+            width: 30px;
+            margin: 0 5px;
+        }
+
+        #widgetModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        /* Added keyframes for flashing animation */
+        @keyframes flash {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.5;
+            }
+        }
+
+        /* Added keyframes for moving to the right animation */
+        @keyframes moveRight {
+            from {
+                right: 20px;
+            }
+            to {
+                right: 80px; /* Adjust the distance as needed */
+            }
+        }
+
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
 <!-- Button with Carousel -->
-<!-- Wrapped the button in a container div -->
 <div id="widgetContainer">
     <button id="widgetBtn">
         <div class="carousel">
             <!-- Icons go here -->
             <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\whatsapp.png" alt="WhatsApp"></div>
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\mail-inbox-app.png" alt="Email"></div>
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\messenger.png" alt="Messenger"></div>
-        <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back"></div>
+            <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\mail-inbox-app.png" alt="Email"></div>
+            <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\messenger.png" alt="Messenger"></div>
+            <div><img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back"></div>
         </div>
     </button>
 </div>
@@ -67,46 +107,40 @@
 <div id="widgetModal">
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
         <!-- Icons go here -->
-        
 
+        <div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
+            <a href="mailto:gascherrysafaris@gmail.com" target="_blank">
+                <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\mail-inbox-app.png" alt="Email" style="margin-right: 10px;"> Send Us an Email
+            </a>
+        </div>
 
-                <div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
-        <a href="mailto:gascherrysafaris@gmail.com" target="_blank">
-            <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\mail-inbox-app.png" alt="Email" style="margin-right: 10px;"> Send Us an Email
-        </a>
-    </div>
+        <div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
+            <a href="https://wa.me/254720285568?text=I%20am%20interested%20in%20a%20Safari%20by%20Gascherry%20Safaris!" target="_blank">
+                <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\whatsapp.png" alt="WhatsApp" style="margin-right: 10px;"> We are on WhatsApp
+            </a>
+        </div>
 
-                   <div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
-        <a href="https://wa.me/254720285568?text=I%20am%20interested%20in%20a%20Safari%20by%20Gascherry%20Safaris!" target="_blank">
-            <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\whatsapp.png" alt="WhatsApp" style="margin-right: 10px;"> We are on WhatsApp
-        </a>
-    </div>
-                <div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
-        <a href="https://m.me/yourFacebookPage" target="_blank">
-            <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\messenger.png" alt="Messenger" style="margin-right: 10px;"> We are on Facebook
-        </a>
-    </div>
+        <div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;">
+            <a href="https://m.me/yourFacebookPage" target="_blank">
+                <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\messenger.png" alt="Messenger" style="margin-right: 10px;"> We are on Facebook
+            </a>
+        </div>
 
-
-
-                    
-                    <button id="callBackBtn" style="text-align: center; display: flex; align-items: center; margin-bottom: 10px; background: none; border: none; cursor: pointer;">
-    <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back" style="margin-right: 10px;">
-    Request a Call Back
-</button>
+        <button id="callBackBtn" style="text-align: center; display: flex; align-items: center; margin-bottom: 10px; background: none; border: none; cursor: pointer;">
+            <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back" style="margin-right: 10px;">
+            Request a Call Back
+        </button>
 
     </div>
 </div>
 
+<!-- Callback Modal -->
 <div id="callBackModal" style="display: none;">
+    <p class="text-align">Please enter your name and phone number and we will call you back soon.</p>
     <form>
-        
-        <input type="text" id="name" name="name" required placeholder="name">
-
-       
-        <input type="tel" id="phone" name="phone" required placeholder="phone">
-
-        <button type="submit">Submit</button>
+        <input type="text" id="name" name="name" required placeholder="Enter your name">
+        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+        <button type="submit">Call Me Back</button>
     </form>
 </div>
 
@@ -126,20 +160,18 @@
             showItem(currentIndex);
         }
 
-        // Wait for images to load
-        $(window).on('load', function () {
-            // Set initial position and show the first item
-            showItem(currentIndex);
+        // Set initial position and show the first item
+        showItem(currentIndex);
 
-            // Change slide every 2 seconds
-            setInterval(nextItem, 2000);
-        });
+        // Change slide every 2 seconds
+        setInterval(nextItem, 2000);
 
+        // Toggle the widget modal when the button is clicked
         $('#widgetBtn').click(function () {
             $('#widgetModal').toggle();
         });
 
-        // Show the callback modal when the button is clicked
+        // Toggle the callback modal when the button is clicked
         $('#callBackBtn').click(function () {
             $('#callBackModal').toggle();
         });
