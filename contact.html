@@ -4,60 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Page Title</title>
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+   <style type="text/css">
+    /* Other styles remain unchanged */
 
-        /* Added styles for the widget container */
-        #widgetContainer {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            margin: 20px;
-            z-index: 999;
-        }
+    #callBackModal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+    }
 
-        #widgetBtn {
-            background-color: #dfa72d;
-            border-radius: 50%;
-            padding: 30px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
+    #callBackModal form {
+        text-align: center;
+    }
 
-        .carousel {
-            display: flex;
-            overflow: hidden;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+    #callBackModal label {
+        display: block;
+        margin-bottom: 10px;
+    }
 
-        .carousel div {
-            flex: 0 0 100%;
-            display: none;
-        }
+    #callBackModal input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
 
-        #widgetModal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 1000;
-        }
-    </style>
+    #callBackModal button {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
@@ -103,10 +90,24 @@
 
 
                     
-                       <div style="text-align: center; display: flex; align-items: center; margin-bottom: 10px;">
-                   <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back" style="margin-right: 10px"> Request a call Back
-               </div>
+                    <button id="callBackBtn" style="text-align: center; display: flex; align-items: center; margin-bottom: 10px; background: none; border: none; cursor: pointer;">
+    <img src="C:\Users\TC Kitui\Desktop\laravel\flamingo\public\front_assets\images\favicons\call-back.png" alt="Call Back" style="margin-right: 10px;">
+    Request a Call Back
+</button>
+
     </div>
+</div>
+
+<div id="callBackModal" style="display: none;">
+    <form>
+        
+        <input type="text" id="name" name="name" required placeholder="name">
+
+       
+        <input type="tel" id="phone" name="phone" required placeholder="phone">
+
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
 <script type="text/javascript">
@@ -127,7 +128,7 @@
 
         // Wait for images to load
         $(window).on('load', function () {
-            // Set initial position and show first item
+            // Set initial position and show the first item
             showItem(currentIndex);
 
             // Change slide every 2 seconds
@@ -136,6 +137,19 @@
 
         $('#widgetBtn').click(function () {
             $('#widgetModal').toggle();
+        });
+
+        // Show the callback modal when the button is clicked
+        $('#callBackBtn').click(function () {
+            $('#callBackModal').toggle();
+        });
+
+        // Close the callback modal when the form is submitted
+        $('#callBackModal form').submit(function (e) {
+            e.preventDefault();
+            // Handle form submission logic here
+            // Close the callback modal after handling the submission
+            $('#callBackModal').hide();
         });
     });
 </script>
